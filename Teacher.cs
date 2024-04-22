@@ -681,3 +681,13 @@ namespace AcademicSys
     }
 }
 
+
+
+
+                "SELECT s.first_name, s.last_name, g.name, gr.PW, gr.PP, gr.EX FROM student AS s JOIN groups g ON s.group_id = g.id JOIN grades gr ON s.id = gr.student_id WHERE s.id = @uL AND gr.lecture_id = @aL"
+                string lecturerQuery = " UPDATE grades SET PW = @pw, PP = @pp, EX = @ex WHERE student_id = @st";
+                MySqlCommand updateGrades = new MySqlCommand(lecturerQuery, db.GetConnection());
+                updateGrades.Parameters.Add("@pw", MySqlDbType.Int32).Value = textBox3.Text;
+                updateGrades.Parameters.Add("@pp", MySqlDbType.Int32).Value = textBox9.Text;
+                updateGrades.Parameters.Add("@ex", MySqlDbType.Int32).Value = textBox10.Text;
+                updateGrades.Parameters.Add("@st", MySqlDbType.Int32).Value = student[0];
